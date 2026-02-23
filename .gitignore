@@ -1,0 +1,7 @@
+/pcos_rag_env
+/PCOS_corpus
+/chroma_db
+.env
+__pycache__/rag.cpython-312.pyc
+.DS_Store
+.gitattributes

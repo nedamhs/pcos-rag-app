@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PCOS RAG Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PCOS Clinical Assistant</h1>
+        <p class="subtitle">Ask evidence-based questions about Polycystic Ovary Syndrome diagnosis, treatment, and management.</p>
+
+        <div class="input-group">
+            <input type="text" id="question" placeholder="Type your question here...">
+            <button onclick="askQuestion()">Ask</button>
+        </div>
+        
+        <div id="answer"></div>
+    </div>
+    
+    <script>
+        async function askQuestion()
+        {
+            const question = document.getElementById('question').value;
+            const answerDiv = document.getElementById('answer');
+            answerDiv.innerHTML = "<span class='loading'>Searching medical literature...</span>";
+            
+            const response = await fetch('http://localhost:8000/ask', 
+            {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({question: question})
+            });
+            
+            const data = await response.json();
+            // answerDiv.innerHTML = "<strong>Answer:</strong><br>" + data.answer.replace(/\n/g, '<br>');
+            answerDiv.innerHTML = "<strong>Answer:</strong><br>" + formatMarkdown(data.answer);
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('question').addEventListener('keypress', function(e) 
+        {
+            if (e.key === 'Enter') askQuestion();
+        });
+
+        function formatMarkdown(text) {
+            // Convert ** to <bold>
+            text = text.replace(/\*\*(.*?)\*\*/g, '<bold>$1</bold>');
+            // Convert newlines to <br>
+            text = text.replace(/\n/g, '<br>');
+            return text;
+        }
+    </script>
+</body>
+</html>
