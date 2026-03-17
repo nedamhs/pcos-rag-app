@@ -1,6 +1,10 @@
 # pcos-rag-app
 Clinical literature RAG for polycystic ovary syndrome (PCOS)
 
+An evidence-based clinical Q&A system for Polycystic Ovary Syndrome (PCOS), 
+built to enable semantic search over clinical literature and deliver 
+LLM-synthesized answers grounded in real medical sources.
+
 
 
 <img src='demo.gif' width='' alt='Video Walkthrough' />
