@@ -5,8 +5,7 @@ An evidence-based clinical Q&A system for Polycystic Ovary Syndrome (PCOS),
 built to enable semantic search over clinical literature and deliver 
 LLM-synthesized answers grounded in real medical papers.
 
-
-
+## Demo
 <img src='demo.gif' width='' alt='Video Walkthrough' />
 
 
